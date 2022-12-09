@@ -117,10 +117,13 @@ class App {
 
   async _getRegionAndCountry(lat, lng) {
     const data = await this._getJSON(
-      `${config.URL_GEOCODE}reverse?access_key=${config.KEY_GEOCODE}&query=${lat},${lng}`
+      `${config.URL_GEOCODE}reverse-geocode-client?latitude=${lat}&longitude=${lng}`
+      // `${config.URL_GEOCODE}reverse?access_key=${config.KEY_GEOCODE}&query=${lat},${lng}`
     );
 
-    return data.data[0];
+    console.log(data)
+
+    return data;
   }
 
   async _getRegionWeather(lat, lng) {
@@ -218,8 +221,8 @@ class App {
       const dataRegion = await this._getRegionAndCountry(lat, lng);
       const dataWeather = await this._getRegionWeather(lat, lng);
 
-      const county = dataRegion.county;
-      const country = dataRegion.country;
+      const county = dataRegion.locality;
+      const country = dataRegion.countryName;
       const weather = dataWeather.main;
       const icon = this._getWeatherIcon(dataWeather.id);
       let workout;
