@@ -221,6 +221,8 @@ class App {
       const dataRegion = await this._getRegionAndCountry(lat, lng);
       const dataWeather = await this._getRegionWeather(lat, lng);
 
+      console.log(dataRegion)
+
       const county = dataRegion.locality;
       const country = dataRegion.countryName;
       const weather = dataWeather.main;
